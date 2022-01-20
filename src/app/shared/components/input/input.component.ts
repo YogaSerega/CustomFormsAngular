@@ -16,15 +16,15 @@ import {Subject, Subscription, takeUntil} from "rxjs";
 })
 
 export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  @Input() public type: string = 'name'
+  @Input() public type: string = 'text'
   @Input() public placeholder: string = 'Enter your name'
 
+
   public destroyed$: Subject<void> = new Subject<void>();
-  public name: string = 'name'
+
   public inputControl = new FormControl()
 
   public onChange: (value: string) => void = (value) => {
-    console.log(value)
   }
   public onTouch: (event: Event) => {}
 
@@ -32,10 +32,8 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
     this.inputControl.patchValue(value)
   }
 
-  public registerOnChange(fn: (value: string) => {}) {
-    if (this.onChange) {
-      this.onChange = fn
-    }
+  public registerOnChange(fn: (value: string) => void) {
+    this.onChange = fn
   }
 
   public registerOnTouched(fn: (event: Event) => {}) {
@@ -51,11 +49,12 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
     this.destroyed$.complete()
   }
 
-  private _subscribeOnChange(): Subscription {
-    return this.inputControl.valueChanges.pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe((value: string) => {
-      this.onChange(value)
-    })
+  private _subscribeOnChange(): void {
+    this.inputControl.valueChanges
+      .pipe(
+        takeUntil(this.destroyed$)
+      ).subscribe(
+        (value: string) => this.onChange(value)
+      )
   }
 }

@@ -4,7 +4,7 @@ import {LoginComponent} from "./login/login.component";
 import {InputModule} from "../shared/components/input/input.module";
 import {CheckboxModule} from "../shared/components/checkbox/checkbox.module";
 import {ButtonComponent} from "../shared/components/button/button.component";
-import {MatButtonModule} from "@angular/material/button";
+import {DropdownModule} from "../shared/components/dropdown/dropdown.module";
 
 
 
@@ -15,7 +15,7 @@ import {MatButtonModule} from "@angular/material/button";
   ],
   imports: [
     CommonModule,
-    InputModule, CheckboxModule, MatButtonModule
+    InputModule, CheckboxModule, DropdownModule
   ]
 })
 export class AuthFormModule { }

@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'custom-form';
+
+  public contactTypes: { value: string, title: string }[] = [
+    {value: 'phone', title: 'Phone', },
+    {value: 'e-mail', title: 'E-mail', },
+    {value: 'skype', title: 'Skype', }
+  ];
 }

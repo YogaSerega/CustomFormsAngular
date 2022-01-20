@@ -1,0 +1,35 @@
+.dropdown-group {
+  max-width: 300px;
+  border: 1px solid #333333;
+  position: relative;
+  margin: 20px 50px 20px;
+}
+
+.dropdown-state {
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid #333333;
+  box-shadow: 0 -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+}
+
+.dropdown-menu {
+  position: absolute;
+  width: 100%;
+}
+
+.active {
+  display: none;
+}
+
+.dropdown-item {
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid #000000;
+  box-shadow: 0 -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+}
+
+.dropdown-item:hover {
+  background-color: #000000;
+  color: #FFFFFF;
+  transition: .5s;
+}
