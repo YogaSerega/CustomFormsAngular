@@ -1,11 +1,6 @@
 import {Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
-interface selectOption {
-  title: string;
-  value: string
-}
-
 @Component({
   selector: 'app-dropdown',
   providers: [
@@ -18,38 +13,30 @@ interface selectOption {
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.css']
 })
-export class DropdownComponent implements ControlValueAccessor {
-
-  @Input() public options: selectOption[] = [];
-
-  public selectedOption: selectOption;
+export class DropdownComponent<T extends Record<string, any>> implements ControlValueAccessor {
+  @Input() public options: T[] = [];
+  @Input() public keyValue: keyof T
+  @Input() public keyName: keyof T
+  public selectedOption: T;
   public open: boolean = false;
   public state: string  = 'Choose something...'
-
-  public onChange: (value: string) => void = (value) => console.log(value)
-  public onTouched: () => void = ()=>{}
-
-  public toggleOpen() {
-    this.open = !this.open;
+  public onChange: (value: string) => void = (value) => {
+    console.log(value)
   }
-  public optionSelect(option: selectOption) {
-    this.writeValue(option.value);
+  public onTouched: () => void = ()=>{}
+  public trackByFn:(index:number)=>number=(index) => index;
+  public toggleOpen: () => void =()=> this.open = !this.open;
+  public optionSelect(option: T) {
+    this.state = option[this.keyName]
+    this.onChange(option[this.keyValue]);
     this.onTouched();
-    this.open = !this.open;
+    this.open = false;
   }
   public get isOpen(): boolean {
     return this.open;
   }
-
   public writeValue(value: string) {
-    const selectedEl = this.options.find(el => el.value === value)
-    this.state = selectedEl!.value
-    if (selectedEl) {
-      this.selectedOption = selectedEl;
-      this.onChange(this.selectedOption.value);
-    }
   }
-
   public registerOnChange(fn: () => void) {
     this.onChange = fn;
   }

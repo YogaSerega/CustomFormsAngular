@@ -1,10 +1,9 @@
 import {Component, OnInit, forwardRef} from "@angular/core";
 import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR
+  ControlValueAccessor, FormBuilder,
+  FormControl, NG_VALUE_ACCESSOR
 } from "@angular/forms";
-import {Subject, Subscription, takeUntil} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 import {Event} from "@angular/router";
 
 @Component({
@@ -23,14 +22,16 @@ import {Event} from "@angular/router";
 export class CheckboxComponent implements ControlValueAccessor, OnInit {
 
   public destroyed$: Subject<void> = new Subject<void>();
-
   public checked: boolean = false;
+
+  constructor(private fb: FormBuilder) {
+  }
+  public checkBoxControl: FormControl = this.fb.control(this.checked)
   public onChange: (value: string) => void = (value) => {
     console.log(value)
   }
   public onTouch: (event: Event) => {}
-  public checkBoxControl = new FormControl()
-  public valueChanges:Subscription
+
 
   public ngOnInit() {
  this._subscribeOnChange()
@@ -50,11 +51,9 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
     this.destroyed$.complete()
   }
 
-  private _subscribeOnChange(): Subscription {
-    return this.checkBoxControl.valueChanges.pipe(
+  private _subscribeOnChange(): void {
+  this.checkBoxControl.valueChanges.pipe(
       takeUntil(this.destroyed$)
-    ).subscribe((value: string) => {
-      this.onChange(value)
-    })
+    ).subscribe((value: string) =>  this.onChange(value))
   }
 }

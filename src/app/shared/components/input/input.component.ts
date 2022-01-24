@@ -1,7 +1,7 @@
 import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl} from "@angular/forms";
 import {Event} from "@angular/router";
-import {Subject, Subscription, takeUntil} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-input',
@@ -16,28 +16,24 @@ import {Subject, Subscription, takeUntil} from "rxjs";
 })
 
 export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  @Input() public type: string = 'text'
-  @Input() public placeholder: string = 'Enter your name'
-
-
+  @Input() public type: 'text' | 'email' | 'password' | 'number ' = 'text';
+  @Input() public placeholder: string = 'Enter your name';
   public destroyed$: Subject<void> = new Subject<void>();
-
-  public inputControl = new FormControl()
-
+  public inputControl = new FormControl();
   public onChange: (value: string) => void = (value) => {
   }
   public onTouch: (event: Event) => {}
 
   public writeValue(value: string) {
-    this.inputControl.patchValue(value)
+    this.inputControl.patchValue(value, {emitEvent: false});
   }
 
   public registerOnChange(fn: (value: string) => void) {
-    this.onChange = fn
+    this.onChange = fn;
   }
 
   public registerOnTouched(fn: (event: Event) => {}) {
-    this.onTouch = fn
+    this.onTouch = fn;
   }
 
   public ngOnInit(): void {
@@ -54,7 +50,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroyed$)
       ).subscribe(
-        (value: string) => this.onChange(value)
-      )
+      (value: string) => this.onChange(value)
+    );
   }
 }

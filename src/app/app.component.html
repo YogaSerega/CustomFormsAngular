@@ -1,5 +1,23 @@
-<router-outlet>
-  <app-login></app-login>
-  <app-dropdown [options]="contactTypes"></app-dropdown>
+<div class="header">
+  <div class="title">
+    <h1>{{title}}</h1>
+  </div>
+  <div class="nav">
+    <a routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact:true}"
+       [routerLink]="['/login']">Home</a>
+    <a routerLinkActive="active" [routerLink]="['/train']">Train</a>
+    <a routerLinkActive="active" [routerLink]="['/registration']">Registration</a>
+    <img
+      class="imgLogout"
+      routerLinkActive="active"
+      [routerLink]="['/login']"
+      src="../assets/logout.svg"
+      alt="logout"
+      (click)="this.authService.logout">
 
+  </div>
+</div>
+<router-outlet>
 </router-outlet>
+

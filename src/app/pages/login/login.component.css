@@ -1,29 +1,3 @@
-.header {
-  text-align: center;
-  background: silver;
-  padding: 5px 50px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.nav {
-  max-width: 300px;
-  display: flex;
-  text-decoration: none;
-  padding: 5px;
-  font-size: 1.5rem;
-}
-
-a {
-  color: #FFFFFF;
-  text-decoration: none;
-  margin: auto 10px;
-}
-
-a:hover {
-  color: #000000;
-  transition: .5s;
-}
 
 .container {
   width: 20vw;

@@ -1,15 +1,7 @@
-<div class="header">
-  <div class="title">
-    <h1>Login Form</h1>
-  </div>
-  <div class="nav">
-    <a href="/">Home</a>
-    <a href="/">Registration</a>
-  </div>
-</div>
-<div class="container">
-  <app-input type="email" placeholder="Enter your email"></app-input>
-  <app-input type="password" placeholder="Password"></app-input>
-  <app-button></app-button>
+
+<div class="container" [formGroup]="form">
+  <app-input type="email" formControlName="email" placeholder="Enter your email"></app-input>
+  <app-input type="password" formControlName="password" placeholder="Password"></app-input>
+  <app-button (click)="onSubmit(this.form)" >Login</app-button>
 </div>
 
