@@ -1,6 +1,6 @@
 <div class="dropdown-group">
   <div class="dropdown-state" (click)="toggleOpen()">{{ state }}</div>
-  <div class="dropdown-menu" [ngClass]="{'dropdown-menu active':!isOpen}">
+  <div class="dropdown-menu" [ngClass]="{'dropdown-menu active':open}">
     <div
       class="dropdown-item"
       *ngFor="let option of options trackBy: trackByFn"
