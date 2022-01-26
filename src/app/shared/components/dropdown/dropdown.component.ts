@@ -1,5 +1,5 @@
 import {Component, forwardRef, Input} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'app-dropdown',
@@ -19,27 +19,38 @@ export class DropdownComponent<T extends Record<string, any>> implements Control
   @Input() public keyName: keyof T
   public selectedOption: T;
   public open: boolean = false;
-  public state: string  = 'Choose something...'
+  public state: string = 'Choose something...'
+
+  public get isOpen(): boolean {
+    return this.open;
+  }
+
   public onChange: (value: string) => void = (value) => {
     console.log(value)
   }
-  public onTouched: () => void = ()=>{}
-  public trackByFn:(index:number)=>number=(index) => index;
-  public toggleOpen: () => void =()=> this.open = !this.open;
+
+  public onTouched: () => void = () => {
+  }
+
+  public trackByFn: (index: number) => number = (index) => index;
+
+  public toggleOpen: () => void = () => this.open = !this.open;
+
   public optionSelect(option: T) {
     this.state = option[this.keyName]
     this.onChange(option[this.keyValue]);
     this.onTouched();
     this.open = false;
   }
-  public get isOpen(): boolean {
-    return this.open;
-  }
+
   public writeValue(value: string) {
+    this.state = value
   }
+
   public registerOnChange(fn: () => void) {
     this.onChange = fn;
   }
+
   public registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
