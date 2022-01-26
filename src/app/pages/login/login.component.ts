@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AuthService} from '../../core/services/auth.service';
 
@@ -6,7 +6,8 @@ import {AuthService} from '../../core/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
   public form = this._fb.group({

@@ -1,2 +1,14 @@
-<p>registration works!</p>
+<script src="registration.module.ts"></script>
+<div [formGroup]="form" class="container">
+  <app-input formControlName="name" placeholder="Your Name" type="text"></app-input>
+  <app-input formControlName="login" placeholder="Login" type="text"></app-input>
+  <app-input formControlName="email" placeholder="Email" type="email"></app-input>
+  <app-input formControlName="password" placeholder="Password" type="password"></app-input>
+
+  <div *ngIf=" form.get('password')!.invalid && form.get('password')!.touched">
+
+  </div>
+  <app-input formControlName="confirmPassword" placeholder="Confirm password" type="password"></app-input>
+  <app-button (click)="register()" [buttonClass]='form.invalid ? "error":"primary"'>Register</app-button>
+</div>
 

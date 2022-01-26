@@ -1,0 +1,22 @@
+
+.container {
+  width: 20vw;
+  height: 50vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+app-input, app-button {
+  padding: 0.5em;
+  width: 100%;
+}
+
+small {
+  color: red;
+}
+

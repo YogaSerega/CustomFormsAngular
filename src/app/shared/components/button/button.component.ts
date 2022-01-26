@@ -1,7 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup} from "@angular/forms";
-
-
 
 @Component({
   selector: 'app-button',
@@ -9,9 +6,9 @@ import {FormGroup} from "@angular/forms";
   styleUrls: ['./button.component.css']
 })
 
-
 export class ButtonComponent implements OnInit {
- @Input() buttonClass:'primary'|'secondary'| 'error' = 'primary'
+  @Input() buttonClass: 'primary' | 'secondary' | 'error' = 'primary'
+
   public ngOnInit(): void {
   }
 }

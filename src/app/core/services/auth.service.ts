@@ -7,6 +7,13 @@ interface ILoginForm {
   password: string
 }
 
+interface IRegisterForm {
+  name: string
+  login: string
+  email: string
+  password: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +21,7 @@ interface ILoginForm {
 
 export class AuthService {
   public loginInfo: ILoginForm | null
+  public registerInfo: IRegisterForm | null
   private isAuth: boolean = true;
 
   constructor(public redirect: RouterService) {
@@ -33,11 +41,19 @@ export class AuthService {
     this.redirect.redirect(ERoutes.LOGIN)
   }
 
+  public register(value: IRegisterForm) {
+    this.isAuth = true;
+    this.registerInfo = value
+    console.log(this.registerInfo)
+    this.redirect.redirect(ERoutes.TRAIN)
+  }
+
   public isAuthenticated(): Promise<boolean> {
+
     return new Promise((resolve => {
       setTimeout(() => {
         resolve(this.isAuth)
-      }, 2000)
+      }, 1000)
     }))
   }
 }
