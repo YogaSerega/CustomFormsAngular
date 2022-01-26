@@ -1,7 +1,6 @@
-
-<div class="container" [formGroup]="form">
-  <app-input type="email" formControlName="email" placeholder="Enter your email"></app-input>
-  <app-input type="password" formControlName="password" placeholder="Password"></app-input>
-  <app-button (click)="onSubmit(this.form)" >Login</app-button>
+<div [formGroup]="form" class="container">
+  <app-input formControlName="email" placeholder="Enter your email" type="email"></app-input>
+  <app-input formControlName="password" placeholder="Password" type="password"></app-input>
+  <app-button (click)="login()">Login</app-button>
 </div>
 

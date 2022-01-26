@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {AuthService} from '../../core/services/auth.service';
 
-interface ILoginForm {
-  email: [string]
-  password: string
-}
 
 @Component({
   selector: 'app-login',
@@ -12,12 +9,16 @@ interface ILoginForm {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public form = this.fb.group({ //TODO не вставляется дженерик с интерфейсом
+  public form = this._fb.group({
     email: [''],
     password: ['']
   })
 
-  constructor(private fb: FormBuilder) {
+  constructor(private _fb: FormBuilder, private _authService:AuthService) {
+  }
+
+  public login() {
+    this._authService.login(this.form.value)
   }
 
   public onSubmit(form: FormGroup) {
