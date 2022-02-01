@@ -8,11 +8,19 @@
        routerLinkActive="active">Home</a>
     <a [routerLink]="['/train']" routerLinkActive="active">Train</a>
     <a [routerLink]="['/registration']" routerLinkActive="active">Registration</a>
+    <!--  TODO  не срабатывают сразу изменения в isAuthenticate-->
+    <img
+      *ngIf="authService.isAuthenticated | async"
+      [routerLink]="['/edit-info']"
+      alt="editLogin"
+      class="img"
+      routerLinkActive="active"
+      src="../assets/person.svg">
     <img
       (click)="authService.logout()"
       [routerLink]="['/login']"
       alt="logout"
-      class="imgLogout"
+      class="img"
       routerLinkActive="active"
       src="../assets/logout.svg">
 

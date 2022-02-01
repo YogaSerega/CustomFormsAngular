@@ -1,17 +1,21 @@
 import {Injectable} from '@angular/core';
 import {RouterService} from './router.service';
 import {ERoutes} from '../../shared/constants/enums/routes';
+import {HttpClient} from '@angular/common/http';
+import {tap} from 'rxjs';
+
+import {environment} from '../../../environments/environment';
 
 interface ILoginForm {
   email: string
   password: string
 }
 
-interface IRegisterForm {
-  name: string
-  login: string
-  email: string
-  password: string
+interface IUserInfo {
+  displayName: string
+  image: null
+  token: string
+  userName: string
 }
 
 @Injectable({
@@ -21,39 +25,60 @@ interface IRegisterForm {
 
 export class AuthService {
   public loginInfo: ILoginForm | null
-  public registerInfo: IRegisterForm | null
-  private isAuth: boolean = true;
+  public userInfo: IUserInfo | null
 
-  constructor(public redirect: RouterService) {
+  public isAuthenticated: Promise<string | null> =
+    new Promise((resolve => {
+      setTimeout(() => {
+        console.log(localStorage.getItem('userToken'))
+        resolve(localStorage.getItem('userToken'))
+      }, 1000)
+    }))
+
+  constructor(public redirect: RouterService, private http: HttpClient) {
   }
 
   public login(value: ILoginForm) {
-    this.isAuth = true;
     this.loginInfo = value
-    this.redirect.redirect(ERoutes.TRAIN)
-    console.log(this.loginInfo)
+    this.http.post(environment.loginApi, value).pipe(
+      tap((result: any) => { //TODO type
+        if (result.token) {
+          localStorage.setItem('userToken', result.token)
+        }
+      })
+    ).subscribe(() => {
+      this.redirect.redirect(ERoutes.TRAIN)
+    }, (error) => {
+      throw new Error(error.error)
+    })
+
   }
 
   public logout() {
-    this.isAuth = false;
+    localStorage.removeItem('userToken')
     this.loginInfo = null;
-    console.log(this.loginInfo)
     this.redirect.redirect(ERoutes.LOGIN)
   }
 
-  public register(value: IRegisterForm) {
-    this.isAuth = true;
-    this.registerInfo = value
-    console.log(this.registerInfo)
+  public register(value: IUserInfo) {
+    this.userInfo = value
     this.redirect.redirect(ERoutes.TRAIN)
-  }
-
-  public isAuthenticated(): Promise<boolean> {
-
-    return new Promise((resolve => {
-      setTimeout(() => {
-        resolve(this.isAuth)
-      }, 1000)
-    }))
+    this.http.post(environment.registerApi, value)
+      .pipe(
+        tap((result: any) => {
+          if (result.token) {
+            console.log(result.token)
+            localStorage.setItem('userToken', result.token)
+          }
+        })
+      ).subscribe(
+      () => {
+        this.redirect.redirect(ERoutes.TRAIN)
+      },
+      error => {
+        throw new Error(error.error)
+      }
+    );
   }
 }
+

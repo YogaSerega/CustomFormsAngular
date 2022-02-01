@@ -1,17 +1,15 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
+import {passwordValidation} from '../../shared/constants/regexps/regexps';
 import {AuthService} from '../../core/services/auth.service';
 
-import {passwordValidation} from '../../shared/constants/regexps/regexps';
-import {passwordMatchValidator} from '../../shared/validators/password-match.validator';
-
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-edit-info',
+  templateUrl: './edit-info.component.html',
+  styleUrls: ['./edit-info.component.css']
 })
-export class RegistrationComponent implements OnInit {
+export class EditInfoComponent implements OnInit {
+
   public form = this._fb.group({
     userName: ['', [Validators.required]],
     displayName: ['', [Validators.required]],
@@ -20,7 +18,7 @@ export class RegistrationComponent implements OnInit {
       Validators.required,
       Validators.pattern(passwordValidation)]],
     confirmPassword: [''],
-  }, { validators: passwordMatchValidator })
+  })
 
   constructor(private _fb: FormBuilder, private _authService: AuthService) {
   }

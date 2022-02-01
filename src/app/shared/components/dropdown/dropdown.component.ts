@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
@@ -11,7 +11,8 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     }
   ],
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.css']
+  styleUrls: ['./dropdown.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class DropdownComponent<T extends Record<string, any>> implements ControlValueAccessor {
   @Input() public options: T[] = [];

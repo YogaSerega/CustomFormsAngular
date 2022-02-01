@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Subject, takeUntil} from 'rxjs';
 import {Event} from '@angular/router';
@@ -14,7 +14,8 @@ import {Event} from '@angular/router';
       useExisting: forwardRef(() => CheckboxComponent),
       multi: true
     }
-  ]
+  ],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class CheckboxComponent implements ControlValueAccessor, OnInit {
 

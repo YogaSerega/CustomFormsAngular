@@ -7,7 +7,7 @@
 }
 
 .nav {
-  max-width: 300px;
+  max-width: 400px;
   display: flex;
   text-decoration: none;
   padding: 5px;
@@ -29,13 +29,13 @@ a:hover {
   transition: .5s;
 }
 
-.imgLogout {
+.img {
   max-width: 20px;
   padding: 0 10px;
   margin-right: 10px;
 }
 
-.imgLogout:hover {
+.img:hover {
   cursor: pointer;
   background-color: #333333;
   transition: 0.5s;

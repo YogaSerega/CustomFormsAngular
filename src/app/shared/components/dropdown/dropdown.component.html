@@ -1,12 +1,12 @@
 <div class="dropdown-group">
-  <div class="dropdown-state" (click)="toggleOpen()">{{ state }}</div>
-  <div class="dropdown-menu" [ngClass]="{'dropdown-menu active':open}">
+  <div (click)="toggleOpen()" class="dropdown-state">{{ state }}</div>
+  <div [ngClass]="{'dropdown-menu active':!open}" class="dropdown-menu">
     <div
-      class="dropdown-item"
+      (click)="optionSelect(option)"
       *ngFor="let option of options trackBy: trackByFn"
-      (click)="optionSelect(option)">
+      class="dropdown-item">
       {{option[keyName]}}
     </div>
-    <div class="dropdown-item" *ngIf="!options.length">No items for select</div>
+    <div *ngIf="!options.length" class="dropdown-item">No items for select</div>
   </div>
 </div>

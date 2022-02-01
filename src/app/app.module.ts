@@ -6,11 +6,12 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {TrainModule} from './pages/train/train.module';
 import {LoginModule} from './pages/login/login.module';
 import {RegistrationModule} from './pages/registration/registration.module';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,6 +20,7 @@ import {RegistrationModule} from './pages/registration/registration.module';
     TrainModule,
     LoginModule,
     RegistrationModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

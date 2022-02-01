@@ -15,6 +15,11 @@ const routes: Routes = [
       .then((m) => m.RegistrationModule),
   },
   {
+    path: 'edit-info',
+    loadChildren: () => import('./pages/edit-info/edit-info.module')
+      .then((m) => m.EditInfoModule),
+  },
+  {
     path: 'train',
     loadChildren: () => import('./pages/train/train.module')
       .then((m) => m.TrainModule),
